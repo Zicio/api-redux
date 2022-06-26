@@ -1,3 +1,7 @@
+[Ссылка на GP](https://zicio.github.io/crud-router/)
+
+[Ссылка на задание](https://github.com/Zicio/ra16-homeworks/tree/master/router/crud)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
