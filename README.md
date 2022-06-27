@@ -1,6 +1,6 @@
-[Ссылка на GP](https://zicio.github.io/crud-router/)
+[Ссылка на GP](https://zicio.github.io/api-redux/)
 
-[Ссылка на задание](https://github.com/Zicio/ra16-homeworks/tree/master/router/crud)
+[Ссылка на задание](https://github.com/Zicio/ra16-homeworks/tree/master/thunk/api-redux)
 
 # Getting Started with Create React App
 

@@ -46,10 +46,13 @@ export const removeService = (id) => ({
 //   payload: item,
 // });
 
-export const fetchServices = async (dispatch) => {
+export const fetchServices = () => async (dispatch) => {
   dispatch(fetchServicesRequest());
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}`);
+    // const response = await fetch(`${process.env.REACT_APP_API_URL}`);
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/posts?_limit=5"
+    );
     if (!response.ok) {
       throw new Error(response.statusText);
     }
