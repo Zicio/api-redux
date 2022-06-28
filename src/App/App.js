@@ -7,7 +7,7 @@ function App() {
     <div className="app">
       <div className="container">
         <div className="row">
-          <div className="col-5">
+          <div className="col-6">
             <Routes>
               <Route
                 path="/api-redux/"
