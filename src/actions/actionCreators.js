@@ -20,9 +20,7 @@ export const fetchServicesFailure = (error) => ({
 
 export const fetchServicesSuccess = (items) => ({
   type: FETCH_SERVICES_SUCCESS,
-  payload: {
-    items,
-  },
+  payload: items,
 });
 
 export const changeServiceField = (name, value, content) => ({
@@ -53,11 +51,11 @@ export const fetchServices = () => async (dispatch) => {
     const response = await fetch(
       "https://jsonplaceholder.typicode.com/posts?_limit=5"
     );
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
+    // if (!response.ok) {
+    //   throw new Error(response.statusText);
+    // }
     const data = await response.json();
-    console.log(data);
+    console.log("DATA", data);
     dispatch(fetchServicesSuccess(data));
   } catch (e) {
     dispatch(fetchServicesFailure(e.message));

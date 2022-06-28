@@ -5,18 +5,24 @@ import ServiceList from "../Components/ServiceList/ServiceList";
 function App() {
   return (
     <div className="app">
-      <Routes>
-        <Route
-          path="/api-redux/"
-          element={
-            <>
-              <Navigate to={"/api-redux/services"} replace />
-            </>
-          }
-        />
-        <Route path="/api-redux/services" element={<ServiceList />} />
-        {/* <Route path="/api-redux/services/:id" element={<ServiceEdit />} /> */}
-      </Routes>
+      <div className="container">
+        <div className="row">
+          <div className="col-5">
+            <Routes>
+              <Route
+                path="/api-redux/"
+                element={
+                  <>
+                    <Navigate to={"/api-redux/services"} replace />
+                  </>
+                }
+              />
+              <Route path="/api-redux/services" element={<ServiceList />} />
+              {/* <Route path="/api-redux/services/:id" element={<ServiceEdit />} /> */}
+            </Routes>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

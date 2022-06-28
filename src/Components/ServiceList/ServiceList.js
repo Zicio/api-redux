@@ -8,14 +8,18 @@ const ServiceList = () => {
 
   useEffect(() => {
     dispatch(fetchServices());
-  }, []);
+  }, [dispatch]);
 
-  const services = useSelector((state) => state.serviceList.services.items);
-  console.log(services.items);
+  const services = useSelector((state) => state.serviceList.services);
+  console.log(services);
 
-  return services.map((service) => (
-    <ServiceCard card={service} key={service.id} />
-  ));
+  return (
+    <div className="service-list">
+      {services.map((service) => (
+        <ServiceCard card={service} key={service.id} />
+      ))}
+    </div>
+  );
 };
 
 export default ServiceList;
