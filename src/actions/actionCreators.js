@@ -13,9 +13,7 @@ export const fetchServicesRequest = () => ({
 
 export const fetchServicesFailure = (error) => ({
   type: FETCH_SERVICES_FAILURE,
-  payload: {
-    error,
-  },
+  payload: error,
 });
 
 export const fetchServicesSuccess = (items) => ({
@@ -47,15 +45,14 @@ export const removeService = (id) => ({
 export const fetchServices = () => async (dispatch) => {
   dispatch(fetchServicesRequest());
   try {
-    // const response = await fetch(`${process.env.REACT_APP_API_URL}`);
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/posts?_limit=5"
-    );
+    const response = await fetch(`${process.env.REACT_APP_API_URL}`);
+    // const response = await fetch(
+    //   "https://jsonplaceholder.typicode.com/posts?_limit=5"
+    // );
     // if (!response.ok) {
     //   throw new Error(response.statusText);
     // }
     const data = await response.json();
-    console.log("DATA", data);
     dispatch(fetchServicesSuccess(data));
   } catch (e) {
     dispatch(fetchServicesFailure(e.message));

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchServices } from "../../actions/actionCreators";
+import "./ServiceList.scss";
 import ServiceCard from "../ServiceCard/ServiceCard";
 
 const ServiceList = () => {
@@ -11,8 +13,15 @@ const ServiceList = () => {
   }, [dispatch]);
 
   const services = useSelector((state) => state.serviceList.services);
-  console.log(services);
+  const loading = useSelector((state) => state.serviceList.loading);
 
+  if (loading) {
+    return (
+      <Spinner animation="border" role="status" variant="danger">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
+  }
   return (
     <div className="service-list">
       {services.map((service) => (
