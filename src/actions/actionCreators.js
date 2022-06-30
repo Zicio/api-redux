@@ -32,9 +32,7 @@ export const changeServiceField = (name, value, content) => ({
 
 export const removeService = (id) => ({
   type: REMOVE_SERVICE,
-  payload: {
-    id,
-  },
+  payload: id,
 });
 
 // export const editService = (item) => ({
@@ -46,15 +44,29 @@ export const fetchServices = () => async (dispatch) => {
   dispatch(fetchServicesRequest());
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL}`);
-    // const response = await fetch(
-    //   "https://jsonplaceholder.typicode.com/posts?_limit=5"
-    // );
-    // if (!response.ok) {
-    //   throw new Error(response.statusText);
-    // }
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
     const data = await response.json();
     dispatch(fetchServicesSuccess(data));
-  } catch (e) {
-    dispatch(fetchServicesFailure(e.message));
+  } catch (err) {
+    dispatch(fetchServicesFailure(err.message));
+  }
+};
+
+export const fetchService = (id) => async (dispatch) => {
+  dispatch(fetchServicesRequest());
+  try {
+    const url = new URL(`${process.env.REACT_APP_API_URL}`);
+    url.searchParams.set("id", `${id}`);
+    const response = await fetch(url, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    dispatch(removeService(id));
+  } catch (err) {
+    dispatch(fetchServicesFailure(err.message));
   }
 };

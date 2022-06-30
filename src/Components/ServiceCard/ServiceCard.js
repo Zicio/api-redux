@@ -1,8 +1,19 @@
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchService } from "../../actions/actionCreators";
+import { Spinner } from "react-bootstrap";
 import "./ServiceCard.scss";
 
 const ServiceCard = ({ card }) => {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.serviceList.loading);
+
+  const handleRemove = (e) => {
+    e.preventDefault();
+    dispatch(fetchService(card.id));
+  };
+
   return (
     <div className="card">
       <div className="card-body">
@@ -11,7 +22,15 @@ const ServiceCard = ({ card }) => {
         </p>
         <ButtonGroup aria-label="Basic example">
           <Button variant="primary">🖉</Button>
-          <Button variant="danger">╳</Button>
+          <Button variant="danger" onClick={handleRemove}>
+            {loading ? (
+              <Spinner animation="border" role="status" variant="danger">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            ) : (
+              "╳"
+            )}
+          </Button>
         </ButtonGroup>
       </div>
     </div>
