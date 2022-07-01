@@ -5,10 +5,12 @@ import {
   compose,
 } from "redux";
 import thunk from "redux-thunk";
-import fetchReducer from "../reducers/reducers";
+import serviceCardReducer from "../reducers/serviceCard";
+import serviceListReducer from "../reducers/serviceList";
 
 const reducer = combineReducers({
-  serviceList: fetchReducer,
+  serviceList: serviceListReducer,
+  serviceCard: serviceCardReducer,
 });
 
 const store = createStore(

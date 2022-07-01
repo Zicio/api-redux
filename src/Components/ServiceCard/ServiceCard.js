@@ -7,7 +7,8 @@ import "./ServiceCard.scss";
 
 const ServiceCard = ({ card }) => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.serviceList.loading);
+  const loading = useSelector((state) => state.serviceCard.loading);
+  console.log(loading);
 
   const handleRemove = (e) => {
     e.preventDefault();
@@ -22,15 +23,15 @@ const ServiceCard = ({ card }) => {
         </p>
         <ButtonGroup aria-label="Basic example">
           <Button variant="primary">🖉</Button>
-          <Button variant="danger" onClick={handleRemove}>
-            {loading ? (
-              <Spinner animation="border" role="status" variant="danger">
-                <span className="visually-hidden">Loading...</span>
-              </Spinner>
-            ) : (
-              "╳"
-            )}
-          </Button>
+          {loading ? (
+            <Spinner animation="border" role="status" variant="danger">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            <Button variant="danger" onClick={handleRemove}>
+              ╳
+            </Button>
+          )}
         </ButtonGroup>
       </div>
     </div>

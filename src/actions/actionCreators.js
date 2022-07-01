@@ -3,6 +3,9 @@ import {
   FETCH_SERVICES_REQUEST,
   FETCH_SERVICES_FAILURE,
   FETCH_SERVICES_SUCCESS,
+  FETCH_SERVICE_REQUEST,
+  FETCH_SERVICE_FAILURE,
+  FETCH_SERVICE_SUCCESS,
   REMOVE_SERVICE,
   EDIT_SERVICE,
 } from "./actionTypes";
@@ -30,9 +33,8 @@ export const changeServiceField = (name, value, content) => ({
   },
 });
 
-export const removeService = (id) => ({
+export const removeService = () => ({
   type: REMOVE_SERVICE,
-  payload: id,
 });
 
 // export const editService = (item) => ({
