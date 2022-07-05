@@ -1,25 +1,16 @@
-import {
-  FETCH_SERVICES_FAILURE,
-  FETCH_SERVICES_REQUEST,
-  // FETCH_SERVICES_SUCCESS,
-  REMOVE_SERVICE,
-} from "../actions/actionTypes";
+import { FETCH_SERVICE_REQUEST, REMOVE_SERVICE } from "../actions/actionTypes";
 
 const initialState = {
+  id: null,
   loading: false,
-  error: null,
 };
 
 const serviceCardReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_SERVICES_REQUEST:
-      return { ...state, error: null, loading: true };
-    // case FETCH_SERVICES_SUCCESS:
-    //   return { ...state, loading: false };
-    case FETCH_SERVICES_FAILURE:
-      return { ...state, error: action.payload, loading: false };
+    case FETCH_SERVICE_REQUEST:
+      return { ...state, id: action.payload, loading: true };
     case REMOVE_SERVICE:
-      return { ...state, loading: false };
+      return { initialState };
     default:
       return state;
   }
