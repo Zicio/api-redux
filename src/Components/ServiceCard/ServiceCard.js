@@ -1,9 +1,13 @@
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchService } from "../../actions/actionCreators";
+import {
+  fetchServiceDelete,
+  fetchServiceEdit,
+} from "../../actions/actionCreators";
 import { Alert, Spinner } from "react-bootstrap";
 import "./ServiceCard.scss";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ card }) => {
   const dispatch = useDispatch();
@@ -17,7 +21,11 @@ const ServiceCard = ({ card }) => {
 
   const handleRemove = (e) => {
     e.preventDefault();
-    dispatch(fetchService(card.id));
+    dispatch(fetchServiceDelete(card.id));
+  };
+
+  const handleEdit = () => {
+    dispatch(fetchServiceEdit(card.id));
   };
 
   if (error) {
@@ -38,7 +46,11 @@ const ServiceCard = ({ card }) => {
           </Button>
         ) : (
           <ButtonGroup aria-label="Basic example">
-            <Button variant="primary">🖉</Button>
+            <Link to={`/api-redux/services/${card.id}`}>
+              <Button variant="primary" onClick={handleEdit}>
+                🖉
+              </Button>
+            </Link>
             <Button variant="danger" onClick={handleRemove}>
               ╳
             </Button>

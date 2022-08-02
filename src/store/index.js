@@ -6,11 +6,13 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import serviceCardReducer from "../reducers/serviceCard";
+import serviceEditReducer from "../reducers/serviceEdit";
 import serviceListReducer from "../reducers/serviceList";
 
 const reducer = combineReducers({
   serviceList: serviceListReducer,
   serviceCard: serviceCardReducer,
+  serviceEdit: serviceEditReducer,
 });
 
 const store = createStore(

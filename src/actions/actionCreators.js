@@ -6,7 +6,7 @@ import {
   FETCH_SERVICE_REQUEST,
   UPDATE_SERVICES,
   REMOVE_SERVICE,
-  EDIT_SERVICE,
+  // EDIT_SERVICE,
 } from "./actionTypes";
 
 export const fetchServicesRequest = () => ({
@@ -23,13 +23,9 @@ export const fetchServicesSuccess = (items) => ({
   payload: items,
 });
 
-export const changeServiceField = (name, value, content) => ({
+export const changeServiceField = (item) => ({
   type: CHANGE_SERVICE_FIELD,
-  payload: {
-    name,
-    value,
-    content,
-  },
+  payload: item,
 });
 
 export const removeService = () => ({
@@ -46,9 +42,9 @@ export const fetchServiceRequest = (id) => ({
   payload: id,
 });
 
-// export const editService = (item) => ({
+// export const editService = (id) => ({
 //   type: EDIT_SERVICE,
-//   payload: item,
+//   payload: id,
 // });
 
 export const fetchServices = () => async (dispatch) => {
@@ -65,7 +61,7 @@ export const fetchServices = () => async (dispatch) => {
   }
 };
 
-export const fetchService = (id) => async (dispatch) => {
+export const fetchServiceDelete = (id) => async (dispatch) => {
   dispatch(fetchServiceRequest(id));
   try {
     const url = new URL(`${process.env.REACT_APP_API_URL}`);
@@ -78,6 +74,22 @@ export const fetchService = (id) => async (dispatch) => {
     }
     dispatch(removeService(id));
     dispatch(updateServices(id));
+  } catch (err) {
+    dispatch(fetchServicesFailure(err.message));
+  }
+};
+
+export const fetchServiceEdit = (id) => async (dispatch) => {
+  dispatch(fetchServiceRequest(id));
+  try {
+    const url = new URL(`${process.env.REACT_APP_API_URL}`);
+    url.searchParams.set("id", `${id}`);
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const item = await response.json();
+    dispatch(changeServiceField(item));
   } catch (err) {
     dispatch(fetchServicesFailure(err.message));
   }
