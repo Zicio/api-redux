@@ -1,6 +1,9 @@
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { changeServiceField } from "../../actions/actionCreators";
+import { Link } from "react-router-dom";
 
 const ServiceEdit = () => {
   const dispatch = useDispatch();
@@ -46,6 +49,12 @@ const ServiceEdit = () => {
           onChange={handleChange}
         />
       </Form.Group>
+      <ButtonGroup aria-label="Basic example">
+        <Link to={`/api-redux/services/`}>
+          <Button variant="danger">Отмена</Button>
+        </Link>
+        <Button variant="primary">Сохранить</Button>
+      </ButtonGroup>
     </Form>
   );
 };

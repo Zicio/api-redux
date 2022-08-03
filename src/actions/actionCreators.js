@@ -6,7 +6,7 @@ import {
   FETCH_SERVICE_REQUEST,
   UPDATE_SERVICES,
   REMOVE_SERVICE,
-  // EDIT_SERVICE,
+  EDIT_SERVICE,
 } from "./actionTypes";
 
 export const fetchServicesRequest = () => ({
@@ -42,10 +42,10 @@ export const fetchServiceRequest = (id) => ({
   payload: id,
 });
 
-// export const editService = (id) => ({
-//   type: EDIT_SERVICE,
-//   payload: id,
-// });
+export const editService = (id) => ({
+  type: EDIT_SERVICE,
+  payload: id,
+});
 
 export const fetchServices = () => async (dispatch) => {
   dispatch(fetchServicesRequest());
@@ -72,7 +72,7 @@ export const fetchServiceDelete = (id) => async (dispatch) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    dispatch(removeService(id));
+    dispatch(removeService());
     dispatch(updateServices(id));
   } catch (err) {
     dispatch(fetchServicesFailure(err.message));
@@ -88,6 +88,7 @@ export const fetchServiceEdit = (id) => async (dispatch) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
+    dispatch(editService(id));
     const item = await response.json();
     dispatch(changeServiceField(item));
   } catch (err) {
