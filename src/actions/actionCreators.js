@@ -5,9 +5,10 @@ import {
   FETCH_SERVICES_SUCCESS,
   FETCH_SERVICE_REQUEST,
   UPDATE_SERVICES,
-  REMOVE_SERVICE,
-  EDIT_SERVICE,
+  STOP_LOADING,
+  // EDIT_SERVICE,
 } from "./actionTypes";
+import { useNavigate } from "react-router-dom";
 
 export const fetchServicesRequest = () => ({
   type: FETCH_SERVICES_REQUEST,
@@ -28,8 +29,8 @@ export const changeServiceField = (item) => ({
   payload: item,
 });
 
-export const removeService = () => ({
-  type: REMOVE_SERVICE,
+export const stopLoading = () => ({
+  type: STOP_LOADING,
 });
 
 export const updateServices = (id) => ({
@@ -42,10 +43,10 @@ export const fetchServiceRequest = (id) => ({
   payload: id,
 });
 
-export const editService = (id) => ({
-  type: EDIT_SERVICE,
-  payload: id,
-});
+// export const editService = () => ({
+//   type: EDIT_SERVICE,
+//   payload:
+// });
 
 export const fetchServices = () => async (dispatch) => {
   dispatch(fetchServicesRequest());
@@ -72,7 +73,7 @@ export const fetchServiceDelete = (id) => async (dispatch) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    dispatch(removeService());
+    dispatch(stopLoading());
     dispatch(updateServices(id));
   } catch (err) {
     dispatch(fetchServicesFailure(err.message));
@@ -88,9 +89,27 @@ export const fetchServiceEdit = (id) => async (dispatch) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    dispatch(editService(id));
+    dispatch(stopLoading());
     const item = await response.json();
     dispatch(changeServiceField(item));
+  } catch (err) {
+    dispatch(fetchServicesFailure(err.message));
+  }
+};
+
+export const fetchСhangedService = (data, navigate) => async (dispatch) => {
+  dispatch(fetchServiceRequest()); //TODO Написать новые actionTypes для EDIT (эти дублируются)
+  try {
+    const url = new URL(`${process.env.REACT_APP_API_URL}`);
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    dispatch(stopLoading()); //TODO Написать новые actionTypes для EDIT (эти дублируются)
+    navigate("/api-redux/services");
   } catch (err) {
     dispatch(fetchServicesFailure(err.message));
   }
