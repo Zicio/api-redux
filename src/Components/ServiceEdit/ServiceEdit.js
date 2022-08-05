@@ -13,9 +13,9 @@ import { useNavigate } from "react-router-dom";
 const ServiceEdit = () => {
   const dispatch = useDispatch();
   const serviceState = useSelector((state) => state.serviceEdit);
-  const loading = null;
+  const { loading } = serviceState;
   console.log(serviceState);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const fieldName = e.target.name;
@@ -27,8 +27,7 @@ const ServiceEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchСhangedService(serviceState, navigate)); //TODO Разобраться со срабатыванием useNavigate после получения Response
-    // navigate("/api-redux/services");
+    dispatch(fetchСhangedService(serviceState, navigate));
   };
 
   return (
@@ -65,23 +64,26 @@ const ServiceEdit = () => {
           // required="true"
         />
       </Form.Group>
-      <ButtonGroup aria-label="Basic example">
+      <ButtonGroup>
         <Link to={`/api-redux/services/`}>
           <Button variant="danger">Отмена</Button>
         </Link>
-        {/* <Link to={`/api-redux/services/`}> */}
         {loading ? (
           <Button variant="danger">
-            <Spinner animation="border" role="status" variant="light" size="sm">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
+            <Spinner
+              animation="border"
+              role="status"
+              variant="light"
+              size="sm"
+              style={{ margin: "25% auto" }}
+            ></Spinner>
+            <span className="visually-hidden">Loading...</span>
           </Button>
         ) : (
           <Button variant="primary" type="submit" form="editForm">
             Сохранить
           </Button>
         )}
-        {/* </Link> */}
       </ButtonGroup>
     </Form>
   );

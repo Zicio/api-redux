@@ -6,9 +6,10 @@ import {
   FETCH_SERVICE_REQUEST,
   UPDATE_SERVICES,
   STOP_LOADING,
-  // EDIT_SERVICE,
+  FETCH_CHANGE_SERVICE_REQUEST,
+  FETCH_CHANGE_SERVICES_SUCCESS,
 } from "./actionTypes";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export const fetchServicesRequest = () => ({
   type: FETCH_SERVICES_REQUEST,
@@ -43,10 +44,13 @@ export const fetchServiceRequest = (id) => ({
   payload: id,
 });
 
-// export const editService = () => ({
-//   type: EDIT_SERVICE,
-//   payload:
-// });
+export const fetchChangeServiceRequest = () => ({
+  type: FETCH_CHANGE_SERVICE_REQUEST,
+});
+
+export const fetchChangeServicesSuccess = () => ({
+  type: FETCH_CHANGE_SERVICES_SUCCESS,
+});
 
 export const fetchServices = () => async (dispatch) => {
   dispatch(fetchServicesRequest());
@@ -98,7 +102,7 @@ export const fetchServiceEdit = (id) => async (dispatch) => {
 };
 
 export const fetchСhangedService = (data, navigate) => async (dispatch) => {
-  dispatch(fetchServiceRequest()); //TODO Написать новые actionTypes для EDIT (эти дублируются)
+  dispatch(fetchChangeServiceRequest());
   try {
     const url = new URL(`${process.env.REACT_APP_API_URL}`);
     const response = await fetch(url, {
@@ -108,7 +112,7 @@ export const fetchСhangedService = (data, navigate) => async (dispatch) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    dispatch(stopLoading()); //TODO Написать новые actionTypes для EDIT (эти дублируются)
+    dispatch(fetchChangeServicesSuccess());
     navigate("/api-redux/services");
   } catch (err) {
     dispatch(fetchServicesFailure(err.message));
