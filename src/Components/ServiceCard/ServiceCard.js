@@ -12,11 +12,14 @@ import { Link } from "react-router-dom";
 const ServiceCard = ({ card }) => {
   const dispatch = useDispatch();
   const serviceState = useSelector((state) => state.serviceCard);
+  // const thisCard = serviceState.cards.find((item) => item.id === card.id);
+  // const { loading, error } = thisCard;
   let loading = null;
   let error = null;
-  if (serviceState.id === card.id) {
-    loading = serviceState.loading;
-    error = serviceState.error;
+  const index = serviceState.cards.findIndex((item) => item.id === card.id);
+  if (index !== -1) {
+    loading = serviceState.cards[index].loading;
+    error = serviceState.cards[index].error;
   }
 
   const handleRemove = (e) => {

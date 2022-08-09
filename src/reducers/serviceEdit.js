@@ -1,6 +1,7 @@
 import {
   CHANGE_SERVICE_FIELD,
-  FETCH_CHANGE_SERVICES_SUCCESS,
+  FETCH_CHANGE_SERVICE_SUCCESS,
+  FETCH_CHANGE_SERVICE_FAILURE,
   FETCH_CHANGE_SERVICE_REQUEST,
 } from "../actions/actionTypes";
 
@@ -10,6 +11,7 @@ const initialState = {
   price: "",
   content: "",
   loading: false,
+  error: null,
 };
 
 const serviceEditReducer = (state = initialState, action) => {
@@ -19,8 +21,10 @@ const serviceEditReducer = (state = initialState, action) => {
       return { ...state, id: id, name: name, price: price, content: content };
     case FETCH_CHANGE_SERVICE_REQUEST:
       return { ...state, loading: true };
-    case FETCH_CHANGE_SERVICES_SUCCESS:
+    case FETCH_CHANGE_SERVICE_SUCCESS:
       return { ...state, loading: false };
+    case FETCH_CHANGE_SERVICE_FAILURE:
+      return { ...state, error: action.payload, loading: false };
     default:
       return state;
   }

@@ -7,7 +7,8 @@ import {
   UPDATE_SERVICES,
   STOP_LOADING,
   FETCH_CHANGE_SERVICE_REQUEST,
-  FETCH_CHANGE_SERVICES_SUCCESS,
+  FETCH_CHANGE_SERVICE_SUCCESS,
+  FETCH_CHANGE_SERVICE_FAILURE,
 } from "./actionTypes";
 // import { useNavigate } from "react-router-dom";
 
@@ -48,8 +49,13 @@ export const fetchChangeServiceRequest = () => ({
   type: FETCH_CHANGE_SERVICE_REQUEST,
 });
 
-export const fetchChangeServicesSuccess = () => ({
-  type: FETCH_CHANGE_SERVICES_SUCCESS,
+export const fetchChangeServiceSuccess = () => ({
+  type: FETCH_CHANGE_SERVICE_SUCCESS,
+});
+
+export const fetchChangeServiceFailure = (error) => ({
+  type: FETCH_CHANGE_SERVICE_FAILURE,
+  payload: error,
 });
 
 export const fetchServices = () => async (dispatch) => {
@@ -112,9 +118,9 @@ export const fetchСhangedService = (data, navigate) => async (dispatch) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    dispatch(fetchChangeServicesSuccess());
+    dispatch(fetchChangeServiceSuccess());
     navigate("/api-redux/services");
   } catch (err) {
-    dispatch(fetchServicesFailure(err.message));
+    dispatch(fetchChangeServiceFailure(err.message));
   }
 };

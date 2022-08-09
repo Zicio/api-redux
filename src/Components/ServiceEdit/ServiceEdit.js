@@ -9,11 +9,12 @@ import {
 import { Link } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 
 const ServiceEdit = () => {
   const dispatch = useDispatch();
   const serviceState = useSelector((state) => state.serviceEdit);
-  const { loading } = serviceState;
+  const { name, price, content, loading, error } = serviceState;
   console.log(serviceState);
   const navigate = useNavigate();
 
@@ -30,6 +31,9 @@ const ServiceEdit = () => {
     dispatch(fetchСhangedService(serviceState, navigate));
   };
 
+  if (error) {
+    return <Alert variant="danger">Произошла ошибка</Alert>;
+  }
   return (
     <Form onSubmit={handleSubmit} id="editForm">
       <Form.Group className="mb-3" controlId="formName">
@@ -37,7 +41,7 @@ const ServiceEdit = () => {
         <Form.Control
           type="text"
           name="name"
-          value={serviceState.name}
+          value={name}
           onChange={handleChange}
           // required="true"
         />
@@ -48,7 +52,7 @@ const ServiceEdit = () => {
         <Form.Control
           type="number"
           name="price"
-          value={serviceState.price}
+          value={price}
           onChange={handleChange}
           // required="true"
         />
@@ -59,7 +63,7 @@ const ServiceEdit = () => {
         <Form.Control
           type="text"
           name="content"
-          value={serviceState.content}
+          value={content}
           onChange={handleChange}
           // required="true"
         />
