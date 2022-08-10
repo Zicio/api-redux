@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/tyqhycxjt2hv8r6c?svg=true)](https://ci.appveyor.com/project/Zicio/api-redux)
+
 [Ссылка на GP](https://zicio.github.io/api-redux/)
 
 [Ссылка на задание](https://github.com/Zicio/ra16-homeworks/tree/master/thunk/api-redux)
