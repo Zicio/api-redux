@@ -5,12 +5,10 @@ import {
   FETCH_SERVICES_SUCCESS,
   FETCH_SERVICE_REQUEST,
   UPDATE_SERVICES,
-  STOP_LOADING,
   FETCH_CHANGE_SERVICE_REQUEST,
   FETCH_CHANGE_SERVICE_SUCCESS,
   FETCH_CHANGE_SERVICE_FAILURE,
 } from "./actionTypes";
-// import { useNavigate } from "react-router-dom";
 
 export const fetchServicesRequest = () => ({
   type: FETCH_SERVICES_REQUEST,
@@ -29,10 +27,6 @@ export const fetchServicesSuccess = (items) => ({
 export const changeServiceField = (item) => ({
   type: CHANGE_SERVICE_FIELD,
   payload: item,
-});
-
-export const stopLoading = () => ({
-  type: STOP_LOADING,
 });
 
 export const updateServices = (id) => ({
@@ -83,7 +77,6 @@ export const fetchServiceDelete = (id) => async (dispatch) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    dispatch(stopLoading());
     dispatch(updateServices(id));
   } catch (err) {
     dispatch(fetchServicesFailure(err.message));
@@ -91,7 +84,6 @@ export const fetchServiceDelete = (id) => async (dispatch) => {
 };
 
 export const fetchServiceEdit = (id) => async (dispatch) => {
-  dispatch(fetchServiceRequest(id));
   try {
     const url = new URL(`${process.env.REACT_APP_API_URL}`);
     url.searchParams.set("id", `${id}`);
@@ -99,7 +91,7 @@ export const fetchServiceEdit = (id) => async (dispatch) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    dispatch(stopLoading());
+    // dispatch(stopLoading());
     const item = await response.json();
     dispatch(changeServiceField(item));
   } catch (err) {

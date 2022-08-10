@@ -14,13 +14,15 @@ const ServiceCard = ({ card }) => {
   const serviceState = useSelector((state) => state.serviceCard);
   // const thisCard = serviceState.cards.find((item) => item.id === card.id);
   // const { loading, error } = thisCard;
-  let loading = null;
-  let error = null;
+  // let loading = false;
+  // let error = null;
   const index = serviceState.cards.findIndex((item) => item.id === card.id);
-  if (index !== -1) {
-    loading = serviceState.cards[index].loading;
-    error = serviceState.cards[index].error;
-  }
+  const loading = index !== -1 ? serviceState.cards[index].loading : false;
+  console.log(loading);
+  // if (index !== -1) {
+  //   loading = serviceState.cards[index].loading;
+  //   error = serviceState.cards[index].error;
+  // }
 
   const handleRemove = (e) => {
     e.preventDefault();
@@ -31,9 +33,9 @@ const ServiceCard = ({ card }) => {
     dispatch(fetchServiceEdit(card.id));
   };
 
-  if (error) {
-    return <Alert variant="danger">Произошла ошибка</Alert>;
-  }
+  // if (error) {
+  //   return <Alert variant="danger">Произошла ошибка</Alert>;
+  // }
 
   return (
     <div className="card">

@@ -43,7 +43,8 @@ const ServiceEdit = () => {
           name="name"
           value={name}
           onChange={handleChange}
-          // required="true"
+          disabled={loading ? true : false}
+          required="true"
         />
       </Form.Group>
 
@@ -54,7 +55,8 @@ const ServiceEdit = () => {
           name="price"
           value={price}
           onChange={handleChange}
-          // required="true"
+          disabled={loading ? true : false}
+          required="true"
         />
       </Form.Group>
 
@@ -65,12 +67,15 @@ const ServiceEdit = () => {
           name="content"
           value={content}
           onChange={handleChange}
-          // required="true"
+          disabled={loading ? true : false}
+          required="true"
         />
       </Form.Group>
       <ButtonGroup>
         <Link to={`/api-redux/services/`}>
-          <Button variant="danger">Отмена</Button>
+          <Button variant="danger" disabled={loading ? true : false}>
+            Отмена
+          </Button>
         </Link>
         {loading ? (
           <Button variant="danger">

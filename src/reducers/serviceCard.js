@@ -1,21 +1,16 @@
-import { FETCH_SERVICE_REQUEST, STOP_LOADING } from "../actions/actionTypes";
-
-// const initialState = {
-//   id: null,
-//   loading: false,
-// };
+import { FETCH_SERVICE_REQUEST } from "../actions/actionTypes";
 
 const initialState = {
   cards: [],
 };
 
 const serviceCardReducer = (state = initialState, action) => {
+  let arr;
   switch (action.type) {
     case FETCH_SERVICE_REQUEST:
-      state.cards.push({ id: action.payload, loading: true });
-      return state;
-    // case STOP_LOADING:
-    //   return { ...state, loading: false };
+      arr = [...state.cards];
+      arr.push({ id: action.payload, loading: true });
+      return { ...state, cards: arr };
     default:
       return state;
   }
