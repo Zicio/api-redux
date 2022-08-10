@@ -5,24 +5,15 @@ import {
   fetchServiceDelete,
   fetchServiceEdit,
 } from "../../actions/actionCreators";
-import { Alert, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import "./ServiceCard.scss";
 import { Link } from "react-router-dom";
 
 const ServiceCard = ({ card }) => {
   const dispatch = useDispatch();
   const serviceState = useSelector((state) => state.serviceCard);
-  // const thisCard = serviceState.cards.find((item) => item.id === card.id);
-  // const { loading, error } = thisCard;
-  // let loading = false;
-  // let error = null;
   const index = serviceState.cards.findIndex((item) => item.id === card.id);
   const loading = index !== -1 ? serviceState.cards[index].loading : false;
-  console.log(loading);
-  // if (index !== -1) {
-  //   loading = serviceState.cards[index].loading;
-  //   error = serviceState.cards[index].error;
-  // }
 
   const handleRemove = (e) => {
     e.preventDefault();
@@ -32,10 +23,6 @@ const ServiceCard = ({ card }) => {
   const handleEdit = () => {
     dispatch(fetchServiceEdit(card.id));
   };
-
-  // if (error) {
-  //   return <Alert variant="danger">Произошла ошибка</Alert>;
-  // }
 
   return (
     <div className="card">

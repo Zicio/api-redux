@@ -10,6 +10,7 @@ import {
   FETCH_CHANGE_SERVICE_FAILURE,
 } from "./actionTypes";
 
+// List
 export const fetchServicesRequest = () => ({
   type: FETCH_SERVICES_REQUEST,
 });
@@ -24,19 +25,21 @@ export const fetchServicesSuccess = (items) => ({
   payload: items,
 });
 
-export const changeServiceField = (item) => ({
-  type: CHANGE_SERVICE_FIELD,
-  payload: item,
-});
-
 export const updateServices = (id) => ({
   type: UPDATE_SERVICES,
   payload: id,
 });
 
+//Card
 export const fetchServiceRequest = (id) => ({
   type: FETCH_SERVICE_REQUEST,
   payload: id,
+});
+
+// Edit
+export const changeServiceField = (item) => ({
+  type: CHANGE_SERVICE_FIELD,
+  payload: item,
 });
 
 export const fetchChangeServiceRequest = () => ({
@@ -91,7 +94,6 @@ export const fetchServiceEdit = (id) => async (dispatch) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    // dispatch(stopLoading());
     const item = await response.json();
     dispatch(changeServiceField(item));
   } catch (err) {

@@ -15,7 +15,6 @@ const ServiceEdit = () => {
   const dispatch = useDispatch();
   const serviceState = useSelector((state) => state.serviceEdit);
   const { name, price, content, loading, error } = serviceState;
-  console.log(serviceState);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -44,7 +43,7 @@ const ServiceEdit = () => {
           value={name}
           onChange={handleChange}
           disabled={loading ? true : false}
-          required="true"
+          required={true}
         />
       </Form.Group>
 
@@ -56,7 +55,7 @@ const ServiceEdit = () => {
           value={price}
           onChange={handleChange}
           disabled={loading ? true : false}
-          required="true"
+          required={true}
         />
       </Form.Group>
 
@@ -68,7 +67,7 @@ const ServiceEdit = () => {
           value={content}
           onChange={handleChange}
           disabled={loading ? true : false}
-          required="true"
+          required={true}
         />
       </Form.Group>
       <ButtonGroup>
