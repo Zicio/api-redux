@@ -13,7 +13,7 @@ const ServiceCard = ({ card }) => {
   const dispatch = useDispatch();
   const serviceState = useSelector((state) => state.serviceCard);
   const index = serviceState.cards.findIndex((item) => item.id === card.id);
-  const loading = index !== -1 ? serviceState.cards[index].loading : false;
+  const loading = index !== -1 ? true : false;
 
   const handleRemove = (e) => {
     e.preventDefault();

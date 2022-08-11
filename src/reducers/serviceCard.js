@@ -9,7 +9,7 @@ const serviceCardReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_SERVICE_REQUEST:
       arr = [...state.cards];
-      arr.push({ id: action.payload, loading: true });
+      arr.push({ id: action.payload });
       return { ...state, cards: arr };
     default:
       return state;
